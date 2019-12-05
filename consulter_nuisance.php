@@ -6,22 +6,8 @@
 
 <?php
     session_start();
-    include_once "myparam.inc.php";
-	// $pseudo = $_SESSION['pseudo'];	
+    include_once "myparam.inc.php";	
 ?>
-<!-- Fonction qui ne sert à rien, mais je la laisse, elle fait joli -->
- <script type="text/javascript">
-    function attribute_value()
-    {
-        var ssp, ff, agri, a = 0;
-        if(document.nuisance.nuisance_ssp.checked == true) { ssp = 1; }
-        if(document.nuisance.nuisance_ff.checked == true) { ff = 1; }
-        if(document.nuisance.nuisance_agri.checked == true) { agri = 1;}
-        if(document.nuisance.nuisance_a.checked == true) { a = 1; }
-
-        //window.location.href="http://bdd.com/consulter_nuisance.php?ssp="+ssp+"&ff="+ff+"&agri="+agri+"&a="+a;
-    }
-</script>
 
 <!DOCTYPE html>
 <html>
@@ -36,6 +22,7 @@
 	<body>
         <div class="corps">
             <h2>Consulter le type du nuisance</h2>
+		<!-- Formulaire de sélections des types de nuisances -->
             <form action="" method="post" class="formulaire" name="nuisance">
                 <div class="control-group <?php echo !empty($Error)?'error':'';?>">
                     <div>
@@ -52,6 +39,7 @@
                         <label for="nuisance_ff">Autres formes de proprité</label>
                     </div>
                     <?php 
+			// si aucun checkbox n'a été checkée, on soulève une erreur
                         if (!empty($fieldsErr)):
                                             
                             echo "<span style=\"color:red; text-align:center\"; class='help-inline'>"; 
@@ -70,6 +58,8 @@
             <?php       
                 if(!empty($_POST))
                 {
+		// On réccupère toutes les valeurs des box checkées. 
+		// Si elles sont été cochées alors on assigne à la variabel $where de quoi complèter la requête SQL plus tard
                     if(isset($_POST['nuisance_ssp']))
                     { 
                         $ssp = $_POST['nuisance_ssp']; 
@@ -84,7 +74,7 @@
 
                         if($ff == 1)
                         {
-                            if(isset($where))
+                            if(isset($where)) // si $where contient déjà quelque chose, alors on ajoute au morceau de requête avec pour liaison le mot clé SQL "AND"
                             {
                                 $where = $where." AND nuisance_ff = 1";
                             }
@@ -127,8 +117,8 @@
                         } 
                     }
 
-                    $base = mysqli_connect(MYHOST, MYUSER, MYPASS, DBNAME);
-                    $sql = "SELECT * FROM especes WHERE $where;";
+                    $base = mysqli_connect(MYHOST, MYUSER, MYPASS, DBNAME); // connexion à la base de onnée
+                    $sql = "SELECT * FROM especes WHERE $where;"; // requête, complétée suivant les choix fait pas l'utilisateur
 
                     $result = mysqli_query($base, $sql);
 
@@ -138,10 +128,11 @@
                     }
                     else
                     {
+			// début du tableau, affichage des en-tête suivant ce qui a été choisi par l'utilisateur
                         echo "<table class=\"tableau\">";
                             echo "<tr>";
                                 echo "<th>Espèces recensées</th>";
-                        if(mysqli_num_rows($result) == 0)
+                        if(mysqli_num_rows($result) == 0) // cas où aucune espèces ne présente les critères de nuisance sélectionnés
                         {
                             echo "<tr>";
                                 echo "<td>Aucune espèce recensée</td>";
@@ -167,7 +158,7 @@
                             }
                             echo "</tr>";
                             
-                            
+                            //  Affichage du tableau recensant les espèces pour le(s) type(s) de nuisance sélectionée(s)
                             while($row = mysqli_fetch_array($result))
                             {
                                 $espece = $row['nomverna'];
