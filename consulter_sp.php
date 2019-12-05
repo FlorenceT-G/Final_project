@@ -7,7 +7,6 @@
 <?php
     session_start();
     include "myparam.inc.php";
-	//$pseudo = $_SESSION['pseudo'];
 ?>
 
 <!DOCTYPE html>
@@ -23,6 +22,7 @@
 	<body>
         <div class="corps">
             <h2>Consulter les espèces nuisibles</h2>
+		<!-- Formulaire affichant un menu déroulant répertoriant le nom de toutes les espèces nuisibles -->
             <form action="" method="post" class="formulaire">
                 <div class="control-group <?php echo !empty($Error)?'error':'';?>">
                     <div>
@@ -42,7 +42,7 @@
                             ?>
                         </select>
                     </div>
-                    <?php 
+                    <?php // en cas d'erreur
                         if (!empty($fieldsErr))
                         {                            
                             echo "<span style=\"color:red; text-align:center\"; class='help-inline'>"; 
@@ -62,12 +62,12 @@
             <?php
                 if(!empty($_POST))
                 {
-                    $espece = $_POST["espece"];
+                    $espece = $_POST["espece"]; // récupère le choix de l'utilisateur
                 
                     $fieldsErr = null;
                 
                     $base = mysqli_connect(MYHOST, MYUSER, MYPASS, DBNAME) or die ("Impossible de se connecter à la base de données !");
-                    $sql = "SELECT DISTINCT lieu FROM recensement WHERE nomverna = '".$espece."';"  ;
+                    $sql = "SELECT DISTINCT lieu FROM recensement WHERE nomverna = '".$espece."';"  ; // requête
                 
                     $result = mysqli_query($base, $sql);
                 
@@ -76,20 +76,20 @@
                         echo("Error description: ".mysqli_error($base));
                     }
                     else
-                    {
+                    {	//Affichage du tableau
                         echo "<h2> Espèce sélectionnée : ".$espece."</h2>";
                         echo "<table class=\"tableau\">";
                             echo "<tr>";
                                 echo "<th>Lieux</th>";
                             echo "</tr>";
-                        if(mysqli_num_rows($result) == 0)
+                        if(mysqli_num_rows($result) == 0) // cas où l'espèce choisi n'a été aperçue nul part
                         {
                             echo "<tr>";
                                 echo "<td>Espèce pas encore recensée</td>";
                             echo "</tr>";
                         }
                         else
-                        {
+                        {	// affichage de toutes les régions dans lesquelles l'espèce en question est apparue
                             while($row = mysqli_fetch_array($result))
                             {
                                 $lieu = $row["lieu"];
@@ -128,7 +128,7 @@
                         }
                         else
                         {
-                         
+                         // affiche toutes les maladies potentiellement transmises par l'espèces en question
                             while($row2 = mysqli_fetch_array($result))
                             {
                                 $maladie = $row2['nom_maladie'];
@@ -154,7 +154,7 @@
                         echo("Error description: ".mysqli_error($base));
                     } 
                     else
-                    {
+                    {	// tableau affichant tous les types de nuisance liés à l'espèce en question
                         echo "<table class=\"tableau\">";
                             echo "<tr>";
                                 echo "<th>Nuisances liées</th>";
