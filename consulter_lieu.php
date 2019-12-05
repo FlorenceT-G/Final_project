@@ -23,6 +23,7 @@
 	<body>
         <div class="corps">
             <h2>Consulter les espèces nuisibles suivant le lieu</h2>
+		<!-- Formulaire permettant d'afficher un menu déroulant à partir des lieux des recensement de la base de donnée -->
             <form action="" method="post" class="formulaire">
                 <div class="control-group <?php echo !empty($Error)?'error':'';?>">
                     <div>
@@ -54,10 +55,10 @@
             <?php
             if(!empty($_POST))
             {
-                $region = $_POST['region'];
+                $region = $_POST['region']; // récupère la sélection de l'utilisateur
 
-                $base = mysqli_connect (MYHOST, MYUSER, MYPASS, DBNAME);
-                $sql = "SELECT DISTINCT nomverna FROM recensement WHERE lieu = '".$region."';";
+                $base = mysqli_connect (MYHOST, MYUSER, MYPASS, DBNAME); // connexion à la base de donnée
+                $sql = "SELECT DISTINCT nomverna FROM recensement WHERE lieu = '".$region."';"; // requête
 
                 $result = mysqli_query($base, $sql);
 
@@ -66,20 +67,12 @@
                     echo("Error description: ".mysqli_error($base));
                 }
                 else
-                {
+                {	// résultat sous forme d'un tableau affichant les espèces trouvées dans la région choisi par l'utilisateur
                     echo "<h2>Espèces nuisibles dans la région de ".$region."</h2>";
                     echo "<table class=\"tableau\">";
                         echo "<tr>";
                             echo "<th>Espèces recensées</th>";
                         echo "</tr>";
-                    if(mysqli_num_rows($result) == 0)
-                    {
-                        echo "<tr>";
-                            echo "<td>Aucune espèce recensée</td>";
-                        echo "</tr>";
-                    }
-                    else
-                    {
                         while($row = mysqli_fetch_array($result))
                         {
                             $espece = $row['nomverna'];
@@ -88,7 +81,6 @@
                                 echo "<td>".$espece."</td>";
                             echo "</tr>";
                         }
-                    }
                     echo "</table>";
                 }
                 mysqli_close($base);
