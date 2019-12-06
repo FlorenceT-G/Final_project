@@ -1,0 +1,240 @@
+/*COULEURS
+vert très foncé : #373d0b;
+vert-foncé image fox : #83921b;
+vert-clair image fox : #b7c14e;
+cert très clair : #d3dd88;
+orange fox : #df7d10;
+*/
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,700|Shrikhand');
+
+body{
+	margin : 0;
+	text-align : justify;
+	font-family: "Trebuchet MS", Helvetica, Arial, Verdana, sans-serif;
+	background: #d3dd88;
+}
+
+a {
+	color:#373d0b;
+	font-weight: 600;
+}
+
+a:hover{
+	color:#83921b;
+}
+
+
+header , footer{
+	background: #b7c14e;
+}
+
+header {
+	color : #373d0b;
+	padding-top : 1px;
+	padding-bottom: 0;
+}
+
+.retouraccueil:hover {
+	color : #373d0b;
+}
+
+h1 {
+	font-family: 'Shrikhand','Dancing Script', cursive;
+	text-align : center;
+	font-size: 4em;
+	font-weight: 100;
+	letter-spacing: 0.1em;
+	margin: 0;
+	text-shadow: 0px 0px 1em #e7f295, 0px 0px 0.2em #e7f295, 1px 1px 0.01em white;
+}
+
+
+.MenuHaut ul {
+	margin:0;
+}
+.MenuHaut {
+	background: linear-gradient(#93a41e, #667215);
+}
+
+.onglet {
+	list-style : none;
+	display: inline-block;
+	text-align: left;
+	padding: 0.1em 0.8em;
+	text-decoration: none;
+	text-shadow: 0px 0px 0.2em #d3dd88;
+}
+
+.onglet:hover {
+	background: #93a41e;
+
+}
+
+/* sous menus */
+.onglet ul {
+	display:none;
+	list-style : none;
+	position:absolute;
+}
+
+.onglet:hover ul {
+	display:block;
+	float:none;
+	background: rgba(82.8,86.7,53.4, 0.5);
+	padding: 0.4em;
+}
+
+header a {
+	text-decoration: none;
+	color: #373d0b;
+	font-weight: 700;
+}
+
+header img{
+	border:0;
+	width : 100%;
+	height : auto;
+	padding:1px;
+}
+
+.corps {
+	padding:2em;
+}
+
+footer {
+	font-size: 0.8em;
+	text-align: center;
+	padding:0.3em;
+	line-height: 0.5em;
+
+}
+
+.contacts{
+	list-style : none;
+	display: inline-block;
+}
+
+footer ul {
+	padding: 0;
+}
+
+footer  a {
+	text-align: left;
+	margin:0;
+	background: linear-gradient(#93a41e, #667215);
+	padding:0.5em;
+	line-height: 1.8em;
+	text-shadow: 0px 0px 0.2em #d3dd88;
+}
+
+footer a:hover {
+	background: #93a41e
+}
+
+/* =============================================== */
+/* ----------- Page Connexion ----------- */
+
+.connexion 
+{
+	text-align: center;
+}
+.formulaire 
+{
+	margin-right: auto;
+	margin-left: auto;
+	width: 500px; 
+	padding: 1em; 
+	border: 1px solid black; 
+	border-radius: 1em;
+}
+
+.div_co 
+{
+	margin-top: 1em;
+}
+
+.label_co
+{
+	text-align: right;
+}
+
+.pseudo
+{
+	display: inline-block;
+	margin-left: 66px;
+}
+.mdp
+{
+	display: inline-block;
+	margin-left: 25px;
+}
+
+.button_co
+{
+	align-content: center;
+	width: 319px;
+	height: 30px;
+	display: block;
+	margin: 0 auto;
+}
+
+.colonnelabel {
+	text-align:right;
+}
+
+h2 {
+    text-align:center;
+}
+
+.control-group {
+    text-align:center;
+}
+
+.form-actions {
+    margin-top:0.5em;
+}
+
+/*tableau classement and cie*/
+
+table.tableau {
+	border-collapse: collapse;
+	width: 95%
+}
+
+table.tableau th, table.tableau td {
+	border:1px solid #373d0b;
+	padding: 0.1em 1em;
+	text-align:center;
+	color:#373d0b;
+}
+/*rgba(82.8,86.7,53.4, 0.5)*/
+table.tableau th {
+	background: linear-gradient(#93a41e, #667215);
+	text-shadow: 0px 0px 0.2em #d3dd88;
+}
+
+.textimput {
+	width:100%;
+}
+.dateimput{
+	width:130px;
+}
+
+/*page gestion utilisateur*/
+
+.colonnepseudo {
+	width:9%;
+}
+.colonnenomprenom {
+	width:9%;
+}
+.colonnedate {
+	width:10%;
+}
+.colonnelieu {
+	width:;
+}
+.colonnemail {
+	width:15%;	
+}
+
